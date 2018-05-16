@@ -6,11 +6,11 @@ public class QuadraticStanVertConverter {
 		Scanner sc = new Scanner(System.in);
 		while(true){
 			System.out.println("Quadratic?");
-			long[] a = General.Conversions.toLongArray(sc.next(), "/");
+			long[] a = General.Conversions.inputToLongArray(sc.next(), "/");
 			System.out.println("Linear?");
-			long[] b = General.Conversions.toLongArray(sc.next(), "/");
+			long[] b = General.Conversions.inputToLongArray(sc.next(), "/");
 			System.out.println("Constant?");
-			long[] c = General.Conversions.toLongArray(sc.next(), "/");
+			long[] c = General.Conversions.inputToLongArray(sc.next(), "/");
 			long[][] coefficients = {{a[0], a[1]}, {b[0], b[1]}, {c[0], c[1]}};
 			CatParabolaFinder.printer(a, b, c);
 			converter(standardToVertex(coefficients));

@@ -12,7 +12,7 @@ public class BinomialProbability {
 		System.out.print("How many successes? ");
 		int successes = sc.nextInt();
 		System.out.print("Probability of the event? (Decimal plz)" );
-		int[] chance = General.Conversions.toIntArray(sc.next(), "/");
+		int[] chance = General.Conversions.inputToIntArray(sc.next(), "/");
 		int[] prob = probability(trials, chance, successes);
 		System.out.println(prob[0] + (prob[1] == 1 ? "" : " / " + prob[1]));
 		}

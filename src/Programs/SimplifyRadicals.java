@@ -29,9 +29,9 @@ public class SimplifyRadicals {
 		Collection<Integer> exps = rad.values();
 		for (int exp : exps) {
 			if (exp >= index) {
-				coe.put(General.Conversions.toArray(rad.keySet())[General.Conversions.toArrayList(General.Conversions.toArray(exps)).indexOf(exp)], (exp - (exp % index)) / index);
-				rad.put(General.Conversions.toArray(rad.keySet())[General.Conversions
-						.toArrayList(General.Conversions.toArray(exps)).indexOf(exp)], exp % index);
+				coe.put(General.Conversions.intListToIntArray(rad.keySet())[General.Conversions.intArrayToIntList(General.Conversions.intListToIntArray(exps)).indexOf(exp)], (exp - (exp % index)) / index);
+				rad.put(General.Conversions.intListToIntArray(rad.keySet())[General.Conversions
+						.intArrayToIntList(General.Conversions.intListToIntArray(exps)).indexOf(exp)], exp % index);
 			}
 		}
 

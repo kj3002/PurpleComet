@@ -18,7 +18,7 @@ public class DecimalToFraction {
 	}
 	
 	public static int[] fractionFromDecimal(String startStr, int repeating) {
-		double start = General.Conversions.toDouble(startStr);
+		double start = General.Conversions.stringToDouble(startStr);
 		int startLen = 0;
 		if (startStr.indexOf('.') != -1) {
 			startLen = startStr.substring(startStr.indexOf('.') + 1, startStr.length()).length();

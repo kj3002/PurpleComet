@@ -1,5 +1,6 @@
 package General;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Miscellaneous {
@@ -167,5 +168,30 @@ public class Miscellaneous {
 	// isNumeric() gotten from https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java
 	public static boolean isNumeric(String str) {
 	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+	}
+
+	public static int[] reverse(int[] array) {
+		if (array == null) {
+			return null;
+		}
+		int[] rev = new int[array.length];
+		for(int i = 0; i < array.length; i++)
+			rev[array.length-i-1] = array[i];
+		return rev;
+	}
+	public static char[] reverse(char[] array) {
+		char[] rev = new char[array.length];
+		for(char c = 0; c < array.length; c++)
+			rev[array.length-c-1] = array[c];
+		return rev;
+	}
+	public static ArrayList<Integer> reverse(ArrayList<Integer> list) {
+		if (list == null) {
+			return null;
+		}
+		ArrayList<Integer> rev = new ArrayList<>();
+		for(int i : list)
+			rev.add(list.get(list.size()-i-1));
+		return rev;
 	}
 }

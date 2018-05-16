@@ -17,21 +17,21 @@ public class BaseChange {
 	public static String changeBase(int obase, String num, int base) {
 		num = num.toLowerCase();
 		int base10 = toBase10(obase, num);
-		System.out.println(num + " (base " + obase + ") is " + base10 + " in base 10");
+		//System.out.println(num + " (base " + obase + ") is " + base10 + " in base 10");
 		char[] newNum = new char[(int)Math.floor(Math.log(base10)/Math.log(base))+1];
-		System.out.println("The new number will have " + newNum.length + " digit(s)");
+		//System.out.println("The new number will have " + newNum.length + " digit(s)");
 		for(int in = newNum.length - 1; in >= 0; in--) {
 			int dig = (int)(base10/Math.pow(base, in));
 			base10 -= Math.pow(base, in) * dig;
 			if(dig < 10) newNum[in] = (char)(dig+48);
 			else newNum[in] = (char)(dig+87);
-			System.out.println(dig + " read as " + newNum[in]);
+			//System.out.println(dig + " read as " + newNum[in]);
 		}
-		return General.Conversions.toString(General.Conversions.reverse(newNum)).toUpperCase();
+		return General.Conversions.charArrayToString(General.Miscellaneous.reverse(newNum)).toUpperCase();
 	}
 
 	public static int toBase10(int obase, String n) {
-		char[] num = General.Conversions.reverse(n.toLowerCase().toCharArray());
+		char[] num = General.Miscellaneous.reverse(n.toLowerCase().toCharArray());
 		int base10 = 0;
 		for (int i = 0; i < num.length; i++) {
 			int dig;
