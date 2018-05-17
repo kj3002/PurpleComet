@@ -38,7 +38,7 @@ public class PrimeFactorization {
 			if (isPri)
 				primes.add(pri);
 		}
-		return General.Conversions.toArray(primes);
+		return General.Conversions.intListToIntArray(primes);
 	}
 
 	public static HashMap<Integer, Integer> getPrimeFactors(int num) {

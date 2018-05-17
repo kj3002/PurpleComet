@@ -19,9 +19,9 @@ public class Number {
 	 */
 	public Number(int numInteger, ArrayList<Integer> coefficients, ArrayList<Integer> indexes, ArrayList<Number> radicands, int denominator) {
 		this.numInteger = numInteger;
-		this.coefficients = General.Conversions.toArrayList(coefficients);
-		this.indexes = General.Conversions.toArrayList(indexes);
-		this.radicands = General.Conversions.toNumberList(radicands);
+		this.coefficients = General.Conversions.intListToIntList(coefficients);
+		this.indexes = General.Conversions.intListToIntList(indexes);
+		this.radicands = General.Conversions.numberListToNumberList(radicands);
 		this.denominator = denominator;
 		this.simplify();
 	}
@@ -212,9 +212,9 @@ public class Number {
 	}
 	public void setNumerator(Number numerator) {
 		this.numInteger = numerator.numInteger;
-		this.coefficients = General.Conversions.toArrayList(numerator.coefficients);
-		this.indexes = General.Conversions.toArrayList(numerator.indexes);
-		this.radicands = General.Conversions.toNumberList(numerator.radicands);
+		this.coefficients = General.Conversions.intListToIntList(numerator.coefficients);
+		this.indexes = General.Conversions.intListToIntList(numerator.indexes);
+		this.radicands = General.Conversions.numberListToNumberList(numerator.radicands);
 	}
 	public int getDenominator() {
 		return this.denominator;
@@ -224,9 +224,9 @@ public class Number {
 	}
 	public void set(Number num) {
 		this.numInteger = num.numInteger;
-		this.coefficients = General.Conversions.toArrayList(num.coefficients); // clone so it isnt the same reference
-		this.indexes = General.Conversions.toArrayList(num.indexes);
-		this.radicands = General.Conversions.toNumberList(num.radicands);
+		this.coefficients = General.Conversions.intListToIntList(num.coefficients); // clone so it isnt the same reference
+		this.indexes = General.Conversions.intListToIntList(num.indexes);
+		this.radicands = General.Conversions.numberListToNumberList(num.radicands);
 		this.denominator = num.denominator;
 		this.simplify();
 	}

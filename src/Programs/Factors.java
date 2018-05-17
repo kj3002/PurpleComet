@@ -21,12 +21,12 @@ public class Factors {
 			if (num % fac == 0)
 				halfFacs.add(fac);
 		}
-		ArrayList<Integer> facs = General.Conversions.toArrayList(halfFacs);
+		ArrayList<Integer> facs = General.Conversions.intListToIntList(halfFacs);
 		for (int in = halfFacs.size() - 1; in >= 0; in--) {
 			if (num / halfFacs.get(in) != halfFacs.get(in)) {
 				facs.add(num / halfFacs.get(in));
 			}
 		}
-		return General.Conversions.toArray(facs);
+		return General.Conversions.intListToIntArray(facs);
 	}
 }

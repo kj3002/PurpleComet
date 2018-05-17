@@ -7,7 +7,7 @@ public class ContinuedFractions {
 		Scanner useless = new Scanner(System.in);
 		System.out.println("What is the fraction?");
 		while(true){
-			int[] frac = General.Conversions.toIntArray(useless.next(), "/");
+			int[] frac = General.Conversions.inputToIntArray(useless.next(), "/");
 			int pawn;
 			ArrayList<Integer> list = new ArrayList<Integer>();
 			list.add(frac[0] / frac[1]);

@@ -2,7 +2,6 @@ package Programs;
 
 import java.util.Scanner;
 
-import Programs.QuadraticStanVertConverter;
 public class CatParabolaFinder {
 	public static void main(String[] args) {
 		main();
@@ -13,11 +12,11 @@ public class CatParabolaFinder {
 			System.out.println("Enter the coordinates with a comma between, but no parentheses.");
 			System.out.println("The coordinates will appear below after all points have been submitted.");
 			System.out.println("Point 1:");
-			long[] axy = General.Conversions.toLongArray(catParabola.next(), ",");
+			long[] axy = General.Conversions.inputToLongArray(catParabola.next(), ",");
 			System.out.println("Point 2:");
-			long[] bxy = General.Conversions.toLongArray(catParabola.next(), ",");
+			long[] bxy = General.Conversions.inputToLongArray(catParabola.next(), ",");
 			System.out.println("Point 3:");
-			long[] cxy = General.Conversions.toLongArray(catParabola.next(), ",");
+			long[] cxy = General.Conversions.inputToLongArray(catParabola.next(), ",");
 			System.out.println("Points: ("+axy[0]+","+axy[1]+") , ("+bxy[0]+","+bxy[1]+") , ("+cxy[0]+","+cxy[1]+")");
 			long ab = axy[0] - bxy[0], ac = axy[0] - cxy[0], bc = bxy[0] - cxy[0];
 			if(ab*ac*bc==0) {
