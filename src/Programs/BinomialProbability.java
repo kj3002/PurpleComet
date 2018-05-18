@@ -2,17 +2,15 @@ package Programs;
 
 import java.util.Scanner;
 
-public class BinomialProbability {
-	public static void main(String args[]) {
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
+public class BinomialProbability extends BaseProgram {
+	public void run(Scanner scan) {
 		while(true) {	
 		System.out.print("How many trials? ");
-		int trials = sc.nextInt();
+		int trials = scan.nextInt();
 		System.out.print("How many successes? ");
-		int successes = sc.nextInt();
+		int successes = scan.nextInt();
 		System.out.print("Probability of the event? (Decimal plz)" );
-		int[] chance = General.Conversions.inputToIntArray(sc.next(), "/");
+		int[] chance = General.Conversions.inputToIntArray(scan.next(), "/");
 		int[] prob = probability(trials, chance, successes);
 		System.out.println(prob[0] + (prob[1] == 1 ? "" : " / " + prob[1]));
 		}

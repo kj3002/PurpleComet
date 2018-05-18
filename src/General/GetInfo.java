@@ -183,6 +183,9 @@ public class GetInfo {
 	}
 
 	public static String getSpecialString(String[] ans, String phrase, Scanner scan) {
+		for (int in = 0; in < ans.length; in++) {
+			ans[in] = ans[in].toLowerCase();
+		}
 		String str = "";
 		while (true) {
 			System.out.print(phrase);
@@ -194,7 +197,7 @@ public class GetInfo {
 		}
 		return str;
 	}
-	public static String getString(String[] ans, String phrase) {
+	public static String getSpecialString(String[] ans, String phrase) {
 		Scanner scan = new Scanner(System.in);
 		String str = getSpecialString(ans, phrase, scan);
 		scan.close();
@@ -202,8 +205,12 @@ public class GetInfo {
 	}
 
 	private static boolean isAns(String str, String[] ans) {
+		ArrayList<String> listAns = Conversions.stringArrayToStringList(ans);
+		if (listAns.contains(str)) {
+			return true;
+		}
 		ArrayList<String> cuts = new ArrayList<>();
-		for (String answer : ans) {
+		for (String answer : listAns) {
 			boolean isUsed = true;
 			int n = 1;
 			while (isUsed) {
@@ -215,12 +222,9 @@ public class GetInfo {
 			cuts.add(answer.substring(0, n));
 		}
 
-		for (String answer : ans) {
-			if (str.equals(answer))
-				return true;
-		}
-		if (cuts.contains(str))
+		if (cuts.contains(str)) {
 			return true;
+		}
 		return false;
 	}
 

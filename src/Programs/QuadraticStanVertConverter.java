@@ -1,16 +1,15 @@
 package Programs;
 
 import java.util.Scanner;
-public class QuadraticStanVertConverter {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+public class QuadraticStanVertConverter extends BaseProgram {
+	public void run(Scanner scan) {
 		while(true){
 			System.out.println("Quadratic?");
-			long[] a = General.Conversions.inputToLongArray(sc.next(), "/");
+			long[] a = General.Conversions.inputToLongArray(scan.next(), "/");
 			System.out.println("Linear?");
-			long[] b = General.Conversions.inputToLongArray(sc.next(), "/");
+			long[] b = General.Conversions.inputToLongArray(scan.next(), "/");
 			System.out.println("Constant?");
-			long[] c = General.Conversions.inputToLongArray(sc.next(), "/");
+			long[] c = General.Conversions.inputToLongArray(scan.next(), "/");
 			long[][] coefficients = {{a[0], a[1]}, {b[0], b[1]}, {c[0], c[1]}};
 			CatParabolaFinder.printer(a, b, c);
 			converter(standardToVertex(coefficients));

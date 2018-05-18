@@ -3,9 +3,8 @@ package Programs;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class SimplifyFractions {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class SimplifyFractions extends BaseProgram {
+	public void run(Scanner scan) {
 		while (true) {
 			int numer = General.GetInfo.getInt("What is the numerator of the fraction? ", scan);
 			int denom = General.GetInfo.getInt("What is the denominator of the fraction? ", scan);

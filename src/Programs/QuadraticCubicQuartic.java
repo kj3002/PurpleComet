@@ -2,24 +2,23 @@ package Programs;
 
 import java.util.Scanner;
 
-public class QuadraticCubicQuartic {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+public class QuadraticCubicQuartic extends BaseProgram {
+	public void run(Scanner scan) {
 		System.out.print("Type in power: ");
 		int power;
 		int a = 0, b = 0, c = 0, d, e;
 		int[] radical;
 		int coefficient, radicand;
 		int discriminant = b * b - 4 * a * c;
-		if(sc.hasNextInt()) {
-			power = sc.nextInt();
+		if(scan.hasNextInt()) {
+			power = scan.nextInt();
 			if(power == 2) {
 				System.out.println("a");
-				a = sc.nextInt();
+				a = scan.nextInt();
 				System.out.println("b");
-				b = sc.nextInt();
+				b = scan.nextInt();
 				System.out.println("c");
-				c = sc.nextInt();
+				c = scan.nextInt();
 				
 				if(discriminant < 0) {
 					System.out.print("Imaginary roots");

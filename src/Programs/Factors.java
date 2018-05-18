@@ -3,9 +3,8 @@ package Programs;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Factors {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class Factors extends BaseProgram {
+	public void run(Scanner scan) {
 		while (true) {
 			int num = General.GetInfo.getIntNoMax(1, "What number would you like the factorization of? ", scan);
 			int[] facs = factor(num);

@@ -2,27 +2,26 @@ package Programs;
 
 import java.util.Scanner;
 
-public class PolynomialDivision {
-	public static void main(String[] args){
-		Scanner sc = new Scanner(System.in);	
+public class PolynomialDivision extends BaseProgram {
+	public void run(Scanner scan) {
 		while(true){
 			System.out.print("Degree of dividend? " );
-			int degree1 = sc.nextInt();
+			int degree1 = scan.nextInt();
 			double[] dividendPoly = new double[degree1 + 1];	
 			System.out.print("First coefficient? ");
-			dividendPoly[dividendPoly.length - 1] = sc.nextDouble();	
+			dividendPoly[dividendPoly.length - 1] = scan.nextDouble();
 			for(int i = 1; i <= degree1; i++){
 				System.out.print("Next coefficient? ");
-				dividendPoly[dividendPoly.length - (1 + i)] = sc.nextDouble();
+				dividendPoly[dividendPoly.length - (1 + i)] = scan.nextDouble();
 			}		
 			System.out.print("Degree of divisor? " );
-			int degree2 = sc.nextInt();
+			int degree2 = scan.nextInt();
 			double[] divisorPoly = new double[degree2 + 1];	
 			System.out.print("First coefficient? ");
-			divisorPoly[divisorPoly.length - 1] = sc.nextDouble();
+			divisorPoly[divisorPoly.length - 1] = scan.nextDouble();
 			for(int j = 1; j <= degree2; j++){
 				System.out.print("Next coefficient? ");
-				divisorPoly[divisorPoly.length - (1 + j)] = sc.nextInt();
+				divisorPoly[divisorPoly.length - (1 + j)] = scan.nextInt();
 			}
 			String quotient = "Your quotient is: " + divide(dividendPoly, divisorPoly);
 		}

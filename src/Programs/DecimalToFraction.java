@@ -2,9 +2,8 @@ package Programs;
 
 import java.util.Scanner;
 
-public class DecimalToFraction {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class DecimalToFraction extends BaseProgram {
+	public void run(Scanner scan) {
 		while (true) {
 			String start = General.GetInfo.getString(false, "What is the first (non-repeating) part of the decimal? ", scan);
 			int rep = General.GetInfo.getInt("What is the repeating part of the decimal? ", scan);

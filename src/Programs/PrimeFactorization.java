@@ -5,9 +5,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 
-public class PrimeFactorization {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class PrimeFactorization extends BaseProgram {
+	public void run(Scanner scan) {
 		while (true) {
 			int num = General.GetInfo.getIntNoMax(1, "What number would you like to find the prime factorization of? ",
 					scan);

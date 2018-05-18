@@ -4,9 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class SimplifyRadicals {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class SimplifyRadicals extends BaseProgram {
+	public void run(Scanner scan) {
 		while (true) {
 			int index = General.GetInfo.getIntNoMax(1, "What is the index of the radical? ", scan);
 			int num = General.GetInfo.getIntNoMax(1, "What number would you like to simplify? ", scan);

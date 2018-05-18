@@ -2,16 +2,15 @@ package Programs;
 
 import java.util.Scanner;		//make sure the rest of the import statements aren't collapsed
 import java.util.ArrayList;
-public class ContinuedFractionsInverse {
-	public static void main(String[] args) {
-		Scanner useless = new Scanner(System.in);
+public class ContinuedFractionsInverse extends BaseProgram {
+	public void run(Scanner scan) {
 		while(true){
 			ArrayList<Long> nums = new ArrayList<>();
 			System.out.println("After your first input, you may enter \"0\" to conclude the input stage.");
-			nums.add(useless.nextLong());
+			nums.add(scan.nextLong());
 			long denom = 0, nume = 0, pawn = 1;
 			while(pawn != 0) {
-				pawn = useless.nextInt();
+				pawn = scan.nextInt();
 				nums.add(pawn);
 			}
 			System.out.print("---Stage concluded (last 0 is null)---");

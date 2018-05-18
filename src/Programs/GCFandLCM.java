@@ -3,9 +3,8 @@ package Programs;
 import java.math.BigInteger;
 import java.util.Scanner;
 
-public class GCFandLCM {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class GCFandLCM extends BaseProgram {
+	public void run(Scanner scan) {
 		while (true) {
 			int a = General.GetInfo.getIntNoMax(1, "What is the first number? ", scan);
 			int b = General.GetInfo.getIntNoMax(1, "What is the second number? ", scan);

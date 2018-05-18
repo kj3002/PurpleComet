@@ -26,26 +26,37 @@ public class Miscellaneous {
 	}
 	
 	public static boolean contains(int[] ar, int n) {
+		if (ar == null) return false;
 		for(int i : ar) {
 			if(i == n) return true;
 		}
 		return false;
 	}
 	public static boolean contains(Integer[] ar, Integer n) {
+		if (ar == null) return false;
 		for(Integer i : ar) {
 			if(i == n) return true;
 		}
 		return false;
 	}
 	public static boolean contains(int[][] ar, int n) {
+		if (ar == null) return false;
 		for(int[] ar2 : ar) {
 			if(contains(ar2, n)) return true;
 		}
 		return false;
 	}
 	public static boolean contains(Integer[][] ar, Integer n) {
+		if (ar == null) return false;
 		for(Integer[] ar2 : ar) {
 			if(contains(ar2, n)) return true;
+		}
+		return false;
+	}
+	public static boolean contains(String[] ar, String str) {
+		if (ar == null) return false;
+		for (String s : ar) {
+			if (s.equals(str)) return true;
 		}
 		return false;
 	}

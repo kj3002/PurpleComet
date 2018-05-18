@@ -1,7 +1,9 @@
 package Programs;
 
-public class QuickProgram {
-	public static void main(String[] args) {
+import java.util.Scanner;
+
+public class QuickProgram extends BaseProgram {
+	public void run(Scanner scan) {
 		// Put code here, do not sync changes
 	}
 }
