@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class SinCosTan {
 
 	public static void main(String[] args) {
-		double[] array;
 		double angle = -1;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Type in your angle or radian (type in pi for pi, no exponents accepted)");
@@ -27,9 +26,6 @@ public class SinCosTan {
 			angle = radianToAngle(angle_or_radian);
 		}
 
-
-
-
 		if(!(angle % 30 == 0 || angle % 45 == 0)) {
 			System.out.println("Sin = " + sin(angle));
 			System.out.println("Cos = " + cos(angle));
@@ -40,10 +36,6 @@ public class SinCosTan {
 			cos(angle);
 			tan(angle);
 		}
-
-		//System.out.println("Tan90 =" + Math.tan(angle * Math.PI/180.0));
-
-
 	}
 
 	public static double sin(double angle) {
