@@ -3,7 +3,7 @@ package Programs;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class ContinuedFractions extends BaseProgram {
-	public void run(Scanner scan) {
+	public static void run(Scanner scan) {
 		System.out.println("What is the fraction?");
 		while(true){
 			int[] frac = General.Conversions.inputToIntArray(scan.next(), "/");

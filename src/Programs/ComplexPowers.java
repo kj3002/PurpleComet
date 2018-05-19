@@ -3,7 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class ComplexPowers extends BaseProgram {
-	public void run(Scanner scan) {
+	public static void run(Scanner scan) {
 		while(true){
 		System.out.println("Please state the coefficients of the complex number in a + bi form");
 		System.out.print("a? ");

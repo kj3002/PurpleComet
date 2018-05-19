@@ -3,7 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class PolynomialDivision extends BaseProgram {
-	public void run(Scanner scan) {
+	public static void run(Scanner scan) {
 		while(true){
 			System.out.print("Degree of dividend? " );
 			int degree1 = scan.nextInt();

@@ -3,7 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class QuadraticCubicQuartic extends BaseProgram {
-	public void run(Scanner scan) {
+	public static void run(Scanner scan) {
 		System.out.print("Type in power: ");
 		int power;
 		int a =0 , b =0 , c =0 , d, e;

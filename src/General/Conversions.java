@@ -304,4 +304,12 @@ public class Conversions {
 		}
 		return list;
 	}
+	public static ArrayList<Long> intListToLongList(ArrayList<Integer> list) {
+		if (list == null) return null;
+		ArrayList<Long> ret = new ArrayList<>();
+		for (int i : list) {
+			ret.add((long)i);
+		}
+		return ret;
+	}
 }

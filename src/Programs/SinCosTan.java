@@ -2,13 +2,11 @@ package Programs;
 
 import java.util.Scanner;
 
-public class SinCosTan {
-
-	public static void main(String[] args) {
+public class SinCosTan extends BaseProgram {
+	public static void run(Scanner scan) {
 		double angle = -1;
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Type in your angle or radian (type in pi for pi, no exponents accepted)");
-		String angle_or_radian = sc.next();
+		String angle_or_radian = scan.next();
 		int pi = angle_or_radian.indexOf("pi");
 
 		if(pi == -1) { //Goes to angles

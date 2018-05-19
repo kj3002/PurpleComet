@@ -3,7 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class RegularPolygonArea extends BaseProgram {
-	public void run(Scanner scan) {
+	public static void run(Scanner scan) {
 		while(true){
 			System.out.print("How many sides? ");
 			int sides = scan.nextInt();

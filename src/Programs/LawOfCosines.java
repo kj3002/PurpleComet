@@ -2,24 +2,23 @@ package Programs;
 
 import java.util.Scanner;
 
-public class LawOfCosines {
-	public static void main(String[] args) {
+public class LawOfCosines extends BaseProgram {
+	public static void run(Scanner scan) {
 		double sideA =0, sideB=0, angleC = 0;
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Side a");
-		if(sc.hasNextDouble()){
-			sideA = sc.nextDouble();
+		if(scan.hasNextDouble()){
+			sideA = scan.nextDouble();
 		}
 		System.out.println("Side b");
-		if(sc.hasNextDouble()){
-			sideB = sc.nextDouble();
+		if(scan.hasNextDouble()){
+			sideB = scan.nextDouble();
 		}
 		System.out.println("Angle c");
-		if(sc.hasNextDouble()){
-			angleC = sc.nextDouble();
+		if(scan.hasNextDouble()){
+			angleC = scan.nextDouble();
 		}
 		else {
-			SinCosTan.radianToAngle(sc.next());
+			SinCosTan.radianToAngle(scan.next());
 		}
 
 		System.out.print("C = " + Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2) - 2 * sideA * sideB * SinCosTan.cos(angleC)));

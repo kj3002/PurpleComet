@@ -3,7 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class RationalRootTheorem extends BaseProgram {
-	public void run(Scanner scan) {
+	public static void run(Scanner scan) {
 		System.out.print("Polynomial degree?" );
 		int degree = scan.nextInt();
 		double[] poly = new double[degree + 1];

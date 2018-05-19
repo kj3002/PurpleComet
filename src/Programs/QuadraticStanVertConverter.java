@@ -2,7 +2,7 @@ package Programs;
 
 import java.util.Scanner;
 public class QuadraticStanVertConverter extends BaseProgram {
-	public void run(Scanner scan) {
+	public static void run(Scanner scan) {
 		while(true){
 			System.out.println("Quadratic?");
 			long[] a = General.Conversions.inputToLongArray(scan.next(), "/");
@@ -19,15 +19,15 @@ public class QuadraticStanVertConverter extends BaseProgram {
 		long[][] equation = new long[3][2];
 		equation[0][0] = coefs[0][0];
 		equation[0][1] = coefs[0][1];
-		equation[0] = SimplifyFractions.simplify(equation[0][0], equation[0][1]);
+		equation[0] = SimplifyFractions.simplify(equation[0][0], equation[0][1]).toArray();
 		//end "a" converter
 		equation[1][0] = coefs[0][1] * coefs[1][0];
 		equation[1][1] = 2 * coefs[0][0] * coefs[1][1];
-		equation[1] = SimplifyFractions.simplify(equation[1][0], equation[1][1]);
+		equation[1] = SimplifyFractions.simplify(equation[1][0], equation[1][1]).toArray();
 		//end "h" converter
 		equation[2][0] = 4 * coefs[0][0] * coefs[1][1] * coefs[1][1] * coefs[2][0] - coefs[0][1] * coefs[1][0] * coefs[1][0] * coefs[2][1];
 		equation[2][1] = 4 * coefs[0][0] * coefs[1][1] * coefs[1][1] * coefs[2][1];
-		equation[2] = SimplifyFractions.simplify(equation[2][0], equation[2][1]);
+		equation[2] = SimplifyFractions.simplify(equation[2][0], equation[2][1]).toArray();
 		//end "k" converter
 		for(int i = 0; i < 3; i++) {
 			equation[i][0] *= (equation[i][1] < 0 ? -1 : 1);

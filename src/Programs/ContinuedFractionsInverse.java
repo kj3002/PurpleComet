@@ -3,7 +3,7 @@ package Programs;
 import java.util.Scanner;		//make sure the rest of the import statements aren't collapsed
 import java.util.ArrayList;
 public class ContinuedFractionsInverse extends BaseProgram {
-	public void run(Scanner scan) {
+	public static void run(Scanner scan) {
 		while(true){
 			ArrayList<Long> nums = new ArrayList<>();
 			System.out.println("After your first input, you may enter \"0\" to conclude the input stage.");

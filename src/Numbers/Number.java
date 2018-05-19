@@ -1,14 +1,16 @@
 package Numbers;
 
+import General.Conversions;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Number {
-	protected int numInteger;
-	protected ArrayList<Integer> coefficients;
-	protected ArrayList<Integer> indexes;
+	protected long numInteger;
+	protected ArrayList<Long> coefficients;
+	protected ArrayList<Long> indexes;
 	protected ArrayList<Number> radicands;
-	protected int denominator;
+	protected long denominator;
 	
 	/**
 	 * @param numInteger - integer that starts the numerator (1 in phi, for instance)
@@ -17,15 +19,18 @@ public class Number {
 	 * @param radicands - the radicands for the radicals in the numerator (any Number)
 	 * @param denominator - integer that starts the denominator (2 in phi, for instance)
 	 */
-	public Number(int numInteger, ArrayList<Integer> coefficients, ArrayList<Integer> indexes, ArrayList<Number> radicands, int denominator) {
+	public Number(long numInteger, ArrayList<Long> coefficients, ArrayList<Long> indexes, ArrayList<Number> radicands, long denominator) {
 		this.numInteger = numInteger;
-		this.coefficients = General.Conversions.intListToIntList(coefficients);
-		this.indexes = General.Conversions.intListToIntList(indexes);
+		this.coefficients = General.Conversions.longListToLongList(coefficients);
+		this.indexes = General.Conversions.longListToLongList(indexes);
 		this.radicands = General.Conversions.numberListToNumberList(radicands);
 		this.denominator = denominator;
 		this.simplify();
 	}
-	public Number(int numInteger, int coefficient, int index, Number radicand, int denominator) {
+	public Number(int numInteger, ArrayList<Integer> coefficients, ArrayList<Integer> indexes, ArrayList<Number> radicands, int denominator) {
+		this (numInteger, Conversions.intListToLongList(coefficients), Conversions.intListToLongList(indexes), radicands, denominator);
+	}
+	public Number(long numInteger, long coefficient, long index, Number radicand, long denominator) {
 		this.numInteger = numInteger;
 		this.coefficients = new ArrayList<>();
 		this.coefficients.add(coefficient);
@@ -36,20 +41,35 @@ public class Number {
 		this.denominator = denominator;
 		this.simplify();
 	}
+	public Number(int numInteger, int coefficient, int index, Number radicand, int denominator) {
+		this((long)numInteger, (long)coefficient, (long)index, radicand, (long)denominator);
+	}
 	public Number(int numInteger, int coefficient, int index, int radicand, int denominator) {
 		this(numInteger, coefficient, index, new Number(radicand), denominator);
 	}
-	public Number(int coefficient, int index, Number radicand) {
+	public Number(long coefficient, long index, Number radicand) {
 		this(0, coefficient, index, radicand, 1);
 	}
-	public Number(int coefficient, int index, int radicand) {
+	public Number(int coefficient, int index, Number radicand) {
+		this((long)coefficient, (long)index, radicand);
+	}
+	public Number(long coefficient, long index, long radicand) {
 		this(coefficient, index, new Number(radicand));
 	}
-	public Number(int numInteger, int denominator) {
+	public Number(int coefficient, int index, int radicand) {
+		this((long)coefficient, (long)index, (long)radicand);
+	}
+	public Number(long numInteger, long denominator) {
 		this(numInteger, null, null, null, denominator);
 	}
-	public Number(int number) {
+	public Number(int numInteger, int denominator) {
+		this((long)numInteger, (long)denominator);
+	}
+	public Number(long number) {
 		this(number, 1);
+	}
+	public Number(int number) {
+		this((long)number);
 	}
 	public Number() {
 		this(0);
@@ -58,13 +78,13 @@ public class Number {
 	protected void simplify() {
 		//convert nulls to ArrayLists with length 0
 		if (this.coefficients == null) {
-			this.coefficients = new ArrayList<Integer>();
+			this.coefficients = new ArrayList<>();
 		}
 		if (this.indexes == null) {
-			this.indexes = new ArrayList<Integer>();
+			this.indexes = new ArrayList<>();
 		}
 		if (this.radicands == null) {
-			this.radicands = new ArrayList<Number>();
+			this.radicands = new ArrayList<>();
 		}
 		
 		// ensure no immediate errors
@@ -104,7 +124,7 @@ public class Number {
 		
 		// simplify each radical
 		for (int in = 0; in < this.coefficients.size(); in++) {
-			int gcf = this.radicands.get(in).getNumeratorGCF();
+			long gcf = this.radicands.get(in).getNumeratorGCF();
 			int coef = 1;
 			// simplify the this.index.get(in)th root of gcf
 			for (int testCoef = (int)Math.sqrt(gcf); testCoef > 1; testCoef--) {
@@ -114,7 +134,7 @@ public class Number {
 				}
 			}
 			gcf /= (int)Math.pow(coef, this.indexes.get(in));
-			int[] newRad = { coef, gcf };
+			long[] newRad = { coef, gcf };
 			this.coefficients.set(in, this.coefficients.get(in) * newRad[0]);
 			Number rad = this.radicands.get(in);
 			rad.numInteger *= newRad[1];
@@ -125,7 +145,7 @@ public class Number {
 		}
 
 		// simplify numerator and denominator
-		int gcf = this.getNumeratorGCF();
+		long gcf = this.getNumeratorGCF();
 		gcf = BigInteger.valueOf(gcf).gcd(BigInteger.valueOf(this.denominator)).intValue();
 		this.numInteger /= gcf;
 		this.denominator /= gcf;
@@ -135,8 +155,8 @@ public class Number {
 	}
 	
 	public Number removeRadical(int index) {
-		int coef = this.coefficients.remove(index);
-		int in = this.indexes.remove(index);
+		long coef = this.coefficients.remove(index);
+		long in = this.indexes.remove(index);
 		Number rad = this.radicands.remove(index);
 		if (rad.equals(1)) {
 			return new Number(coef);
@@ -164,8 +184,8 @@ public class Number {
 		return this.numInteger == 0 && this.coefficients.size() == 1 && this.denominator == 1;
 	}
 	
-	public int getNumeratorGCF() {
-		int gcf = this.numInteger;
+	public long getNumeratorGCF() {
+		long gcf = this.numInteger;
 		if (this.numInteger == 0) {
 			if (this.coefficients.size() > 0) {
 				gcf = this.coefficients.get(0);
@@ -173,30 +193,30 @@ public class Number {
 				return 1; // in this case, this is equal to 0 (this.equals(0) returns true)
 			}
 		}
-		for (int coef : this.coefficients) {
+		for (long coef : this.coefficients) {
 			gcf = BigInteger.valueOf(gcf).gcd(BigInteger.valueOf(coef)).intValue();
 		}
 		return gcf;
 	}
 	
-	public int getNumeratorInteger() {
+	public long getNumeratorInteger() {
 		return numInteger;
 	}
-	public void setNumeratorInteger(int numeratorInteger) {
+	public void setNumeratorInteger(long numeratorInteger) {
 		this.numInteger = numeratorInteger;
 		this.simplify();
 	}
-	public ArrayList<Integer> getCoefficients() {
+	public ArrayList<Long> getCoefficients() {
 		return coefficients;
 	}
-	public void setCoefficients(ArrayList<Integer> coefficients) {
+	public void setCoefficients(ArrayList<Long> coefficients) {
 		this.coefficients = coefficients;
 		this.simplify();
 	}
-	public ArrayList<Integer> getIndexes() {
+	public ArrayList<Long> getIndexes() {
 		return indexes;
 	}
-	public void setIndexes(ArrayList<Integer> indexes) {
+	public void setIndexes(ArrayList<Long> indexes) {
 		this.indexes = indexes;
 		this.simplify();
 	}
@@ -212,20 +232,20 @@ public class Number {
 	}
 	public void setNumerator(Number numerator) {
 		this.numInteger = numerator.numInteger;
-		this.coefficients = General.Conversions.intListToIntList(numerator.coefficients);
-		this.indexes = General.Conversions.intListToIntList(numerator.indexes);
+		this.coefficients = General.Conversions.longListToLongList(numerator.coefficients);
+		this.indexes = General.Conversions.longListToLongList(numerator.indexes);
 		this.radicands = General.Conversions.numberListToNumberList(numerator.radicands);
 	}
-	public int getDenominator() {
+	public long getDenominator() {
 		return this.denominator;
 	}
-	public void setDenominator(int denominator) {
+	public void setDenominator(long denominator) {
 		this.denominator = denominator;
 	}
 	public void set(Number num) {
 		this.numInteger = num.numInteger;
-		this.coefficients = General.Conversions.intListToIntList(num.coefficients); // clone so it isnt the same reference
-		this.indexes = General.Conversions.intListToIntList(num.indexes);
+		this.coefficients = General.Conversions.longListToLongList(num.coefficients); // clone so it isnt the same reference
+		this.indexes = General.Conversions.longListToLongList(num.indexes);
 		this.radicands = General.Conversions.numberListToNumberList(num.radicands);
 		this.denominator = num.denominator;
 		this.simplify();
@@ -235,7 +255,7 @@ public class Number {
 		Number num1 = new Number(), num2 = new Number();
 		num1.set(this);
 		num2.set(number);
-		int gcf = BigInteger.valueOf(num1.denominator).gcd(BigInteger.valueOf(num2.denominator)).intValue(),
+		long gcf = BigInteger.valueOf(num1.denominator).gcd(BigInteger.valueOf(num2.denominator)).longValue(),
 				mult1 = num2.denominator / gcf, mult2 = num1.denominator / gcf;
 		num1.numInteger *= mult1;
 		for (int in = 0; in < num1.coefficients.size(); in++) {
@@ -246,7 +266,7 @@ public class Number {
 			num2.coefficients.set(in, num2.coefficients.get(in) * mult2);
 		}
 		
-		ArrayList<Integer> coefs = new ArrayList<>(), ins = new ArrayList<>();
+		ArrayList<Long> coefs = new ArrayList<>(), ins = new ArrayList<>();
 		ArrayList<Number> rads = new ArrayList<>();
 		coefs.addAll(num1.coefficients);
 		coefs.addAll(num2.coefficients);
@@ -264,8 +284,8 @@ public class Number {
 	
 	public Number multiply(Number number) {
 		Number ret = new Number(this.numInteger * number.numInteger);
-		ArrayList<Integer> coefs = new ArrayList<>();
-		ArrayList<Integer> ins = new ArrayList<>();
+		ArrayList<Long> coefs = new ArrayList<>();
+		ArrayList<Long> ins = new ArrayList<>();
 		ArrayList<Number> rads = new ArrayList<>();
 		for (int in = 0; in < this.coefficients.size(); in++) {
 			coefs.add(this.coefficients.get(in) * number.numInteger);
@@ -280,9 +300,9 @@ public class Number {
 		
 		for (int thisIn = 0; thisIn < this.coefficients.size(); thisIn++) {
 			for (int numIn = 0; numIn < number.coefficients.size(); numIn++) {
-				int thisIndex = this.indexes.get(thisIn), numIndex = number.indexes.get(numIn);
-				int lcm = thisIndex * numIndex / BigInteger.valueOf(thisIndex).gcd(BigInteger.valueOf(numIndex)).intValue();
-				int thisMult = lcm / thisIndex, numMult = lcm / numIndex;
+				long thisIndex = this.indexes.get(thisIn), numIndex = number.indexes.get(numIn);
+				long lcm = thisIndex * numIndex / BigInteger.valueOf(thisIndex).gcd(BigInteger.valueOf(numIndex)).intValue();
+				long thisMult = lcm / thisIndex, numMult = lcm / numIndex;
 				Number thisRad = this.radicands.get(thisIn).exponentiate(thisMult), numRad = number.radicands.get(numIn).exponentiate(numMult);
 				coefs.add(this.coefficients.get(thisIn) * number.coefficients.get(numIn));
 				ins.add(lcm);
@@ -301,7 +321,7 @@ public class Number {
 		//return this.multiply(number.exponentiate(-1));
 	}
 	
-	public Number exponentiate(int pow) {
+	public Number exponentiate(long pow) {
 		if (pow < 0) {
 			throw new IllegalArgumentException("Cannot raise to a negative power (yet)"); // TODO make Number.exponentiate work with negatives
 		}
