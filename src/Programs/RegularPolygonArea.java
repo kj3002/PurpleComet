@@ -10,8 +10,7 @@ public class RegularPolygonArea {
 			System.out.print("How many sides? ");
 			int sides = sc.nextInt();
 			if(sides <= 2){
-				System.out.println("please input a number greater than 2");
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("please input a number greater than 2");
 			}
 			System.out.print("Side length? ");
 			double length = sc.nextDouble();
