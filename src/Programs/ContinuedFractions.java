@@ -2,12 +2,11 @@ package Programs;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-public class ContinuedFractions {
-	public static void main(String[] args) {
-		Scanner useless = new Scanner(System.in);
+public class ContinuedFractions extends BaseProgram {
+	public static void run(Scanner scan) {
 		System.out.println("What is the fraction?");
 		while(true){
-			int[] frac = General.Conversions.inputToIntArray(useless.next(), "/");
+			int[] frac = General.Conversions.inputToIntArray(scan.next(), "/");
 			int pawn;
 			ArrayList<Integer> list = new ArrayList<Integer>();
 			list.add(frac[0] / frac[1]);

@@ -2,17 +2,16 @@ package Programs;
 //INCOMPLETE
 import java.util.Scanner;
 
-public class RationalRootTheorem {
-	public static void main(String[] args){
-		Scanner sc = new Scanner(System.in);
+public class RationalRootTheorem extends BaseProgram {
+	public static void run(Scanner scan) {
 		System.out.print("Polynomial degree?" );
-		int degree = sc.nextInt();
+		int degree = scan.nextInt();
 		double[] poly = new double[degree + 1];
 		System.out.print("First coefficient? ");
-		poly[poly.length - 1] = sc.nextInt();
+		poly[poly.length - 1] = scan.nextInt();
 		for(int i = 1; i <= degree; i++){
 		System.out.print("Next coefficient? ");
-		poly[poly.length - (1 + i)] = sc.nextInt();
+		poly[poly.length - (1 + i)] = scan.nextInt();
 		}
 		getRoots(poly);
 	}

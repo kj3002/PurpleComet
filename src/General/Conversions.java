@@ -284,4 +284,32 @@ public class Conversions {
 		}
 		return pawn;
 	}
+	public static String[] stringListToStringArray(ArrayList<String> list) {
+		if (list == null) {
+			return null;
+		}
+		String[] ar = new String[list.size()];
+		for (int in = 0; in < list.size(); in++) {
+			ar[in] = list.get(in);
+		}
+		return ar;
+	}
+	public static ArrayList<String> stringArrayToStringList(String[] ar) {
+		if (ar == null) {
+			return null;
+		}
+		ArrayList<String> list = new ArrayList<>();
+		for (String str : ar) {
+			list.add(str);
+		}
+		return list;
+	}
+	public static ArrayList<Long> intListToLongList(ArrayList<Integer> list) {
+		if (list == null) return null;
+		ArrayList<Long> ret = new ArrayList<>();
+		for (int i : list) {
+			ret.add((long)i);
+		}
+		return ret;
+	}
 }

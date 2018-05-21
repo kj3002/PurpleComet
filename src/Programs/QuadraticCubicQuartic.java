@@ -2,11 +2,8 @@ package Programs;
 
 import java.util.Scanner;
 
-//TODO: LET KEVIN FINISH , btw completely broken rn
-public class QuadraticCubicQuartic {
-
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+public class QuadraticCubicQuartic extends BaseProgram {
+	public static void run(Scanner scan) {
 		System.out.print("Type in power: ");
 		int power;
 		int a =0 , b =0 , c =0 , d, e;
@@ -14,16 +11,15 @@ public class QuadraticCubicQuartic {
 		int[][] bigRadical;
 		int coefficient, radicand;
 		double discriminant = Math.pow(b, 2) - 4 * a * c;
-		if(sc.hasNextInt()) {
-			power = sc.nextInt();
+		if(scan.hasNextInt()) {
+			power = scan.nextInt();
 			if(power == 2) {
 				System.out.print("a: ");
-				a = sc.nextInt();
+				a = scan.nextInt();
 				System.out.print("b: ");
-				b = sc.nextInt();
+				b = scan.nextInt();
 				System.out.print("c: ");
-				c = sc.nextInt();
-
+				c = scan.nextInt();
 				if(discriminant < 0) {
 					System.out.print("Imaginary roots");
 				}
@@ -46,13 +42,13 @@ public class QuadraticCubicQuartic {
 			}
 			else if(power == 3) {
 				System.out.println("a");
-				a = sc.nextInt();
+				a = scan.nextInt();
 				System.out.println("b");
-				b = sc.nextInt();
+				b = scan.nextInt();
 				System.out.println("c");
-				c = sc.nextInt();
+				c = scan.nextInt();
 				System.out.println("d");
-				d = sc.nextInt();
+				d = scan.nextInt();
 
 				double innerRadical = Math.pow((-1 * Math.pow(b, 3))/(27 * Math.pow(b, 3)) + (b * c)/(6 * Math.pow(a, 2)) - (d)/(2*a), 2) + Math.pow((c/(3 * a) - Math.pow(b,2))/(9 * Math.pow(a, 2)),2);
 				if(innerRadical < 0) {

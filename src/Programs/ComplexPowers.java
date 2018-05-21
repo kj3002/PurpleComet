@@ -2,18 +2,16 @@ package Programs;
 
 import java.util.Scanner;
 
-public class ComplexPowers {
-	public static void main(String[] args){
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
+public class ComplexPowers extends BaseProgram {
+	public static void run(Scanner scan) {
 		while(true){
 		System.out.println("Please state the coefficients of the complex number in a + bi form");
 		System.out.print("a? ");
-		int a = sc.nextInt();
+		int a = scan.nextInt();
 		System.out.print("b? ");
-		int b = sc.nextInt();
+		int b = scan.nextInt();
 		System.out.print("To what power? ");
-		int exp = sc.nextInt();
+		int exp = scan.nextInt();
 		int[] ans = pow(a, b, exp);
 		System.out.println(ans[0] + " + " + ans[1] + "i");
 		}

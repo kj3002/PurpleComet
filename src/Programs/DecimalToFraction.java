@@ -1,23 +1,24 @@
 package Programs;
 
+import Numbers.Rational;
+
 import java.util.Scanner;
 
-public class DecimalToFraction {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class DecimalToFraction extends BaseProgram {
+	public static void run(Scanner scan) {
 		while (true) {
 			String start = General.GetInfo.getString(false, "What is the first (non-repeating) part of the decimal? ", scan);
 			int rep = General.GetInfo.getInt("What is the repeating part of the decimal? ", scan);
-			int[] frac = fractionFromDecimal(start, rep);
-			System.out.println(frac[0] + (frac[1] == 1 ? "" : " / " + frac[1]));
+			Rational frac = fractionFromDecimal(start, rep);
+			System.out.println(frac);
 		}
 	}
 
-	public static int[] fractionFromDecimal(double start, int repeating) {
+	public static Rational fractionFromDecimal(double start, int repeating) {
 		return fractionFromDecimal(start + "", repeating);
 	}
 	
-	public static int[] fractionFromDecimal(String startStr, int repeating) {
+	public static Rational fractionFromDecimal(String startStr, int repeating) {
 		double start = General.Conversions.stringToDouble(startStr);
 		int startLen = 0;
 		if (startStr.indexOf('.') != -1) {

@@ -2,9 +2,8 @@ package Programs;
 
 import java.util.Scanner;
 
-public class BaseChange {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class BaseChange extends BaseProgram {
+	public static void run(Scanner scan) {
 		while (true) {
 			int obase = General.GetInfo.getSpecialInt(1, 36, "What is the original base? ", scan);
 			String num = General.GetInfo.getString(false, "What is the number in said base? ", scan);

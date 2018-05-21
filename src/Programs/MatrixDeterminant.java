@@ -2,9 +2,8 @@ package Programs;
 
 import java.util.Scanner;
 
-public class MatrixDeterminant {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+public class MatrixDeterminant extends BaseProgram {
+	public static void run(Scanner scan) {
 		int size = General.GetInfo.getIntNoMax(1, "What is the side length of the matrix? ", scan);
 		int[][] matrix = new int[size][size];
 		for (int x = 0; x < size; x++) {

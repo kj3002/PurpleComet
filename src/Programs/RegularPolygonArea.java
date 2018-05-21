@@ -2,18 +2,16 @@ package Programs;
 
 import java.util.Scanner;
 
-public class RegularPolygonArea {
-	public static void main(String[] args){
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
+public class RegularPolygonArea extends BaseProgram {
+	public static void run(Scanner scan) {
 		while(true){
 			System.out.print("How many sides? ");
-			int sides = sc.nextInt();
+			int sides = scan.nextInt();
 			if(sides <= 2){
 				throw new IllegalArgumentException("please input a number greater than 2");
 			}
 			System.out.print("Side length? ");
-			double length = sc.nextDouble();
+			double length = scan.nextDouble();
 			double area = findArea(sides, length);
 			System.out.println(Math.round(area));
 		}
