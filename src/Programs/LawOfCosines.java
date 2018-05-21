@@ -3,6 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class LawOfCosines extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		double sideA =0, sideB=0, angleC = 0;
 		System.out.println("Side a");

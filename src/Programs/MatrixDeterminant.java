@@ -3,6 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class MatrixDeterminant extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		int size = General.GetInfo.getIntNoMax(1, "What is the side length of the matrix? ", scan);
 		int[][] matrix = new int[size][size];

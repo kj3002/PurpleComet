@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Scanner;
 
 public class GCFandLCM extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		while (true) {
 			int a = General.GetInfo.getIntNoMax(1, "What is the first number? ", scan);

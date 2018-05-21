@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class SimplifyRadicals extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		while (true) {
 			int index = General.GetInfo.getIntNoMax(1, "What is the index of the radical? ", scan);

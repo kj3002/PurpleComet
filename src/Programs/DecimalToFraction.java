@@ -5,6 +5,7 @@ import Numbers.Rational;
 import java.util.Scanner;
 
 public class DecimalToFraction extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		while (true) {
 			String start = General.GetInfo.getString(false, "What is the first (non-repeating) part of the decimal? ", scan);

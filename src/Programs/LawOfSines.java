@@ -3,6 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class LawOfSines {
+    public static void main(String[] args) { run(new Scanner (System.in)); }
     public static void run(Scanner scan) {
         double sideA =0, sideB=0, angleA = 0;
         System.out.println("Side a");

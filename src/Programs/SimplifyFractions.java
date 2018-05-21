@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class SimplifyFractions extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		while (true) {
 			int numer = General.GetInfo.getInt("What is the numerator of the fraction? ", scan);

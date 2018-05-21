@@ -3,6 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class CatParabolaFinder extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		while(true){
 			System.out.println("Enter the coordinates with a comma between, but no parentheses.");

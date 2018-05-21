@@ -3,6 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class SinCosTan extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		double angle = -1;
 		System.out.println("Type in your angle or radian (type in pi for pi, no exponents accepted)");

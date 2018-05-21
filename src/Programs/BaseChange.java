@@ -3,6 +3,7 @@ package Programs;
 import java.util.Scanner;
 
 public class BaseChange extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		while (true) {
 			int obase = General.GetInfo.getSpecialInt(1, 36, "What is the original base? ", scan);

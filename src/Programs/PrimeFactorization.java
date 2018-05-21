@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class PrimeFactorization extends BaseProgram {
+	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		while (true) {
 			int num = General.GetInfo.getIntNoMax(1, "What number would you like to find the prime factorization of? ",
