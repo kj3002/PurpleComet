@@ -74,7 +74,7 @@ public class Number {
 	public Number() {
 		this(0);
 	}
-	
+
 	protected void simplify() {
 		//convert nulls to ArrayLists with length 0
 		if (this.coefficients == null) {
@@ -97,20 +97,24 @@ public class Number {
 		}
 		
 		// remove radicals that should not be there
+		boolean changeMade = false;
 		ArrayList<Number> removed = new ArrayList<>();
 		for (int in = 0; in < this.coefficients.size(); in++) {
 			if (this.coefficients.get(in) == 0 || this.radicands.get(in).equals(0)) {
 				this.removeRadical(in);
 				in--;
+				changeMade = true;
 			} else if (this.radicands.get(in).equals(1)) {
 				this.numInteger += this.coefficients.get(in);
 				this.removeRadical(in);
 				in--;
+				changeMade = true;
 			} else if (this.indexes.get(in) == 1) {
 				removed.add(this.radicands.get(in).multiply(new Number(this.coefficients.get(in)))); // save for later - ensure full simplification
 				this.removeRadical(in);
 				removed.get(removed.size() - 1).setDenominator(this.denominator);
 				in--;
+				changeMade = true;
 			}
 		}
 		
@@ -122,11 +126,11 @@ public class Number {
 			this.radicands.addAll(n.radicands);
 		}
 		
-		// simplify each radical
+		// simplify each radical numerator
 		for (int in = 0; in < this.coefficients.size(); in++) {
-			long gcf = this.radicands.get(in).getNumeratorGCF();
+			long gcf = this.radicands.get(in).getNumeratorGCF(), ogcf = gcf;
 			int coef = 1;
-			// simplify the this.index.get(in)th root of gcf
+			// simplify the (this.index.get(in))th root of gcf
 			for (int testCoef = (int)Math.sqrt(gcf); testCoef > 1; testCoef--) {
 				if (gcf % Math.pow(testCoef, this.indexes.get(in)) == 0) {
 					coef = testCoef;
@@ -138,20 +142,71 @@ public class Number {
 			this.coefficients.set(in, this.coefficients.get(in) * newRad[0]);
 			Number rad = this.radicands.get(in);
 			rad.numInteger *= newRad[1];
-			rad.numInteger /= gcf;
+			rad.numInteger /= ogcf;
 			for (int radIn = 0; radIn < rad.coefficients.size(); radIn++) {
-				rad.coefficients.set(radIn, rad.coefficients.get(radIn) / gcf * newRad[1]);
+				rad.coefficients.set(radIn, rad.coefficients.get(radIn) / ogcf * newRad[1]);
+			}
+			if (gcf != ogcf) {
+				changeMade = true;
+			}
+		}
+
+		// simplify each radical denominator
+		for (int radIn = 0; radIn < this.coefficients.size(); radIn++) {
+			long denom = this.radicands.get(radIn).denominator, odenom = denom;
+			int coef = 1;
+			// simplify the (this.index.get(radIn))th root of denom
+			for (int testCoef = (int)Math.sqrt(denom); testCoef > 1; testCoef--) {
+				if (denom % Math.pow(testCoef, this.indexes.get(radIn)) == 0) {
+					coef = testCoef;
+					break;
+				}
+			}
+			denom /= (int)Math.pow(coef, this.indexes.get(radIn));
+			if (denom != odenom) {
+				this.radicands.get(radIn).denominator = denom;
+				this.numInteger *= coef;
+				this.denominator *= coef;
+				for (int in = 0; in < this.coefficients.size(); in++) {
+					if (in != radIn) {
+						this.coefficients.set(in, this.coefficients.get(in) * coef);
+					}
+				}
+				changeMade = true;
+			}
+
+			// find and combine like terms
+			for (int in1 = 0; in1 < this.coefficients.size() - 1; in1++) {
+				for(int in2 = in1 + 1; in2 < this.coefficients.size(); in2++) {
+					if (this.indexes.get(in1) == this.indexes.get(in2) && this.radicands.get(in1).equals(this.radicands.get(in2))) {
+						this.coefficients.set(in1, this.coefficients.get(in1) + this.coefficients.get(in2));
+						this.removeRadical(in2);
+						in2--;
+						changeMade = true;
+					}
+				}
 			}
 		}
 
 		// simplify numerator and denominator
 		long gcf = this.getNumeratorGCF();
 		gcf = BigInteger.valueOf(gcf).gcd(BigInteger.valueOf(this.denominator)).intValue();
+		if (this.denominator < 0) gcf *= -1;
 		this.numInteger /= gcf;
 		this.denominator /= gcf;
 		for (int in = 0; in < this.coefficients.size(); in++) {
 			this.coefficients.set(in, this.coefficients.get(in) / gcf);
 		}
+		if (gcf != 1) {
+			changeMade = true;
+		}
+		// if this is 0, make denominator 1 (equals(0) and toString() relies on denominator of 1)
+		if (this.numInteger == 0 && this.coefficients.size() == 0) {
+			this.denominator = 1;
+		}
+
+		// if a change was made, call again
+		if (changeMade) simplify();
 	}
 	
 	public Number removeRadical(int index) {
@@ -170,6 +225,23 @@ public class Number {
 	
 	public boolean equals(int n) {
 		return this.isInteger() && this.numInteger == n;
+	}
+	public boolean equals(Number n) {
+		if (this.coefficients.size() != n.coefficients.size() || this.numInteger != n.numInteger || this.denominator != n.denominator) {
+			return false;
+		}
+		Number thisClone = this.clone(), nClone = n.clone();
+		for (int in1 = 0; in1 < thisClone.coefficients.size(); in1++) {
+			for (int in2 = 0; in2 < nClone.coefficients.size(); in2++) {
+				if (thisClone.coefficients.get(in1) == nClone.coefficients.get(in2) && thisClone.indexes.get(in1) == nClone.indexes.get(in2) && thisClone.radicands.get(in1).equals(nClone.radicands.get(in2))) {
+					thisClone.removeRadical(in1);
+					nClone.removeRadical(in2);
+					in1--;
+					in2--;
+				}
+			}
+		}
+		return thisClone.coefficients.size() == 0;
 	}
 	
 	public boolean isRational() {
@@ -240,6 +312,7 @@ public class Number {
 		return this.denominator;
 	}
 	public void setDenominator(long denominator) {
+		if (denominator == 0) throw new IllegalArgumentException("Cannot divide by 0");
 		this.denominator = denominator;
 	}
 	public void set(Number num) {
@@ -249,6 +322,9 @@ public class Number {
 		this.radicands = General.Conversions.numberListToNumberList(num.radicands);
 		this.denominator = num.denominator;
 		this.simplify();
+	}
+	public Number getRadical(int radicalIndex) {
+		return new Number(this.coefficients.get(radicalIndex), this.indexes.get(radicalIndex), this.radicands.get(radicalIndex));
 	}
 	
 	public Number add(Number number) {
@@ -283,7 +359,6 @@ public class Number {
 	}
 	
 	public Number multiply(Number number) {
-		Number ret = new Number(this.numInteger * number.numInteger);
 		ArrayList<Long> coefs = new ArrayList<>();
 		ArrayList<Long> ins = new ArrayList<>();
 		ArrayList<Number> rads = new ArrayList<>();
@@ -309,26 +384,53 @@ public class Number {
 				rads.add(thisRad.multiply(numRad));
 			}
 		}
-		Number numer = new Number(ret.numInteger, coefs, ins, rads, 1);
-		ret.setNumerator(numer);
-		ret.setDenominator(this.denominator * number.denominator);
-		ret.simplify();
-		return ret;
+		return new Number(this.numInteger * number.numInteger, coefs, ins, rads, this.denominator * number.denominator);
 	}
 	
 	public Number divide(Number number) {
 		return new Number(); // TODO divide in Number (see exponentiate)
-		//return this.multiply(number.exponentiate(-1));
+		//return this.multiply(number.reciprocal);
 	}
 	
 	public Number exponentiate(long pow) {
-		if (pow < 0) {
-			throw new IllegalArgumentException("Cannot raise to a negative power (yet)"); // TODO make Number.exponentiate work with negatives
-		}
 		Number ret = new Number(1);
-		for (int n = 0; n < pow; n++) {
+		for (int n = 0; n < Math.abs(pow); n++) {
 			ret = ret.multiply(this);
 		}
+		if (pow < 0) System.out.println("Calling reciprocal with " + this + " pow: " + pow);
+		return pow < 0 ? ret.reciprocal() : ret;
+	}
+
+	public Number reciprocal() {
+		if (this.equals(0)) throw new IllegalArgumentException("Cannot take the reciprocal of 0");
+		Number numerator = this.getNumerator();
+		ArrayList<Number> multipliers = new ArrayList<>();
+		for (int in = 0; in < numerator.coefficients.size(); in++) {
+			Number mult = new Number();
+			Number x = numerator.getRadical(in), y = new Number(-numerator.numInteger);
+			for (int pow = 0; pow < numerator.indexes.get(in); pow++) {
+				Number add;
+				if (y.equals(0) && numerator.indexes.get(in) - pow - 1 == 0) {
+					add = x.exponentiate(pow);
+				} else {
+					add = x.exponentiate(pow).multiply(y.exponentiate(numerator.indexes.get(in) - pow - 1));
+				}
+				mult = mult.add(add);
+			}
+			mult = mult.multiply(new Number(x.radicands.get(0).denominator));
+			multipliers.add(mult);
+			numerator.numInteger = -(long)Math.pow(y.numInteger, numerator.indexes.get(in)) + x.radicands.get(0).numInteger;
+			numerator.coefficients.addAll(x.radicands.get(0).coefficients);
+			numerator.indexes.addAll(x.radicands.get(0).indexes);
+			numerator.radicands.addAll(x.radicands.get(0).radicands);
+		}
+		Number ret = new Number(this.getDenominator());
+		for (Number mult : multipliers) {
+			//System.out.println("ret is: " + ret + " multiplying by: " + mult);
+			ret = ret.multiply(mult);
+		}
+		ret.setDenominator(numerator.numInteger);
+		//System.out.println("ret is: " + ret);
 		ret.simplify();
 		return ret;
 	}
@@ -344,6 +446,11 @@ public class Number {
 			ret += "\u221A(" + this.radicands.get(in).toString() + ")";
 		}
 		ret += this.denominator == 1 ? "" : ") / " + this.denominator;
-		return ret;
+		return ret.equals("") ? "0" : ret;
+	}
+
+	@Override
+	public Number clone() {
+		return new Number(this.numInteger, Conversions.longListToLongList(this.coefficients), Conversions.longListToLongList(this.indexes), Conversions.numberListToNumberList(this.radicands), this.denominator);
 	}
 }
