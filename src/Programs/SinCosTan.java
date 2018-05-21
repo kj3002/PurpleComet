@@ -12,7 +12,7 @@ public class SinCosTan extends BaseProgram {
 		if(pi == -1) { //Goes to angles
 			angle = Integer.parseInt(angle_or_radian);
 			if(angle == -1) {
-				System.out.println("Please put in a valid angle");
+				throw new IllegalArgumentException("Please put in a valid angle");
 			}
 			if(angle < 0) {
 				while(angle < 0) {
