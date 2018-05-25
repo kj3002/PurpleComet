@@ -419,7 +419,10 @@ public class Number {
 			}
 			mult = mult.multiply(new Number(x.radicands.get(0).denominator));
 			multipliers.add(mult);
-			numerator.numInteger = -(long)Math.pow(y.numInteger, numerator.indexes.get(in)) + x.radicands.get(0).numInteger;
+			numerator.numInteger = -(long)Math.pow(y.numInteger, numerator.indexes.get(in)) * x.radicands.get(0).denominator + x.radicands.get(0).numInteger;
+			for (int multIn = 0; multIn < numerator.coefficients.size(); multIn++) {
+				numerator.coefficients.set(multIn, numerator.coefficients.get(multIn) * x.radicands.get(0).denominator);
+			}
 			numerator.coefficients.addAll(x.radicands.get(0).coefficients);
 			numerator.indexes.addAll(x.radicands.get(0).indexes);
 			numerator.radicands.addAll(x.radicands.get(0).radicands);

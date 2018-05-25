@@ -6,9 +6,9 @@ public class BaseChange extends BaseProgram {
 	public static void main(String[] args) { run(new Scanner (System.in)); }
 	public static void run(Scanner scan) {
 		while (true) {
-			int obase = General.GetInfo.getSpecialInt(1, 36, "What is the original base? ", scan);
+			int obase = General.GetInfo.getSpecialInt(2, 36, "What is the original base? ", scan);
 			String num = General.GetInfo.getString(false, "What is the number in said base? ", scan);
-			int base = General.GetInfo.getSpecialInt(1, 36, "What base do you want to convert to? ", scan);
+			int base = General.GetInfo.getSpecialInt(2, 36, "What base do you want to convert to? ", scan);
 			String ans = changeBase(obase, num, base);
 			System.out.println(num + " (base " + obase + ") is " + ans + " in base " + base + "\n");
 		}
